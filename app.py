@@ -242,7 +242,7 @@ async def TcPOnLine(ip, port, key, iv, AutHToKen, reconnect_delay=0.5):
                                 await SEndPacKeT(whisper_writer , online_writer , 'ChaT' , JoinCHaT)
 
 
-                                message = f'[B][C]{get_random_color()}\n- WeLComE To Emote Bot ! \n\n{get_random_color()}- Commands : @a {xMsGFixinG("123456789")} {xMsGFixinG("909000001")}\n\n[00FF00]Dev : @{xMsGFixinG("redzedking")}'
+                                message = f''
                                 P = await SEndMsG(0 , message , OwNer_UiD , OwNer_UiD , key , iv)
                                 await SEndPacKeT(whisper_writer , online_writer , 'ChaT' , P)
                             except:
@@ -277,7 +277,7 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                 data = await reader.read(9999)
                 if not data: break
                 
-                if data.hex().startswith("120000"):
+                if data.hex().startswith("1200"):
 
                     msg = await DeCode_PackEt(data.hex()[10:])
                     chatdata = json.loads(msg)
@@ -292,7 +292,7 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
 
 
                     if response:
-                        if inPuTMsG.startswith(("/5")):
+                        if inPuTMsG.startswith(("/check")):
                             try:
                                 dd = chatdata['5']['data']['16']
                                 print('msg in private')
@@ -315,7 +315,7 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
 
 
 
-                        if inPuTMsG.startswith('/x/'):
+                        if inPuTMsG.startswith('em'):
                             CodE = inPuTMsG.split('/x/')[1]
                             try:
                                 dd = chatdata['5']['data']['16']
@@ -335,7 +335,7 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                             EM = await FS(key , iv)
                             await SEndPacKeT(whisper_writer , online_writer , 'OnLine' , EM)
 
-                        if inPuTMsG.strip().startswith('@a'):
+                        if inPuTMsG.strip().startswith('em'):
 
                             try:
                                 dd = chatdata['5']['data']['16']
@@ -414,19 +414,17 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
         except Exception as e: print(f"ErroR {ip}:{port} - {e}") ; whisper_writer = None
         await asyncio.sleep(reconnect_delay)
 
-# Flask Route Functions
+
 loop = None
 async def perform_emote(team_code: str, uids: list, emote_id: int):
     global key, iv, region, online_writer
     if online_writer is None:
         raise Exception("Bot not connected")
     try:
-        # Join the squad
         EM = await GenJoinSquadsPacket(team_code, key, iv)
         await SEndPacKeT(None, online_writer, 'OnLine', EM)
         await asyncio.sleep(1)
         
-        # Perform emote on each UID sequentially
         for uid_str in uids:
             if uid_str:  
                 uid = int(uid_str)
@@ -437,7 +435,7 @@ async def perform_emote(team_code: str, uids: list, emote_id: int):
     except Exception as e:
         raise Exception(f"Failed to perform emote: {str(e)}")
 
-@app.route('/join')
+@app.route('/em')
 def join_team():
     global loop
     team_code = request.args.get('tc')
@@ -471,12 +469,11 @@ def join_team():
         "status": "success",
         "team_code": team_code,
         "uids": uids,
-        "emote_id": emote_id_str,
-        "message": "Emote performed successfully!"
+        "message": "Done ✅"
     })
 
 def run_flask():
-    app.run(host='0.0.0.0', port=10000, debug=False, use_reloader=False)
+    app.run(host='0.0.0.0', port=10000, debug=True, use_reloader=True)
 
 async def MaiiiinE():
     global loop, key, iv, region
@@ -523,7 +520,7 @@ async def MaiiiinE():
     await asyncio.sleep(1)
     task2 = asyncio.create_task(TcPOnLine(OnLineiP , OnLineporT , key , iv , AutHToKen))
     os.system('clear')
-    print(render('REDZED', colors=['white', 'green'], align='center'))
+    print(render('NoTmeowL', colors=['white', 'green'], align='center'))
     print('')
     #print(' - ReGioN => {region}'.format(region))
     print(f" - BoT STarTinG And OnLine on TarGet : {TarGeT} | BOT NAME : {acc_name}\n")
